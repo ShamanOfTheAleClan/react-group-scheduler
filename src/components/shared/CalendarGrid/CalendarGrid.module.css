@@ -22,3 +22,6 @@
 .selected {
    background-color: tomato;
 }
+.heading {
+   font-weight: bold;
+}

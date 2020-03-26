@@ -11,14 +11,16 @@ export const CalendarGrid = ({ month }) => {
    const calendar = useSelector(getSchedulerDates);
 
    const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-   const selectDay = e => {
-      // console.log(new Date(e.target.dataset.id));
-      dispatch(toggleSchedulerDate(e.target.dataset.id));
-   };
+   const selectDay = e => dispatch(toggleSchedulerDate(e.target.dataset.id));
    return (
       <div className={c.grid} onClick={selectDay}>
          {weekdays.map((e, i) => (
-            <Flex key={i} justifyContent="center" alignItems="center">
+            <Flex
+               key={i}
+               className={c.heading}
+               justifyContent="center"
+               alignItems="center"
+            >
                {e}
             </Flex>
          ))}

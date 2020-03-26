@@ -9,8 +9,14 @@ export const Calendar = () => {
    if (!selectedMonthState && selectedMonthState !== 0)
       setSelectedMonthState(todaysMonth);
 
-   const incrementMonth = () => setSelectedMonthState(selectedMonthState + 1);
-   const decrementMonth = () => setSelectedMonthState(selectedMonthState - 1);
+   const incrementMonth = () =>
+      selectedMonthState === 11
+         ? setSelectedMonthState(0)
+         : setSelectedMonthState(selectedMonthState + 1);
+   const decrementMonth = () =>
+      selectedMonthState === 0
+         ? setSelectedMonthState(11)
+         : setSelectedMonthState(selectedMonthState - 1);
 
    return (
       <Flex flexDirection="column" alignItems="center">
