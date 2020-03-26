@@ -1,0 +1,24 @@
+.grid {
+   --maxWidth: 250px;
+   display: grid;
+   grid-template-columns: repeat(7, 1fr);
+   grid-template-rows: repeat(7, 1fr);
+   gap: 5px;
+   /* justify-items: center; */
+   /* align-items: center; */
+   width: 100vw;
+   max-width: var(--maxWidth);
+   height: 100vw;
+   max-height: calc(var(--maxWidth) / 7 * 6);
+}
+.gridItem {
+   height: 100%;
+   width: 100%;
+   color: #aaa;
+}
+.black {
+   color: #111;
+}
+.selected {
+   background-color: tomato;
+}
