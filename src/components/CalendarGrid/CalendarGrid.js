@@ -1,10 +1,10 @@
 import React from "react";
 import c from "./CalendarGrid.module.css";
-import { Flex } from "../Flex/Flex";
+import { Flex } from "../shared/Flex/Flex";
 import { mapMonth } from "./utils";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSchedulerDate } from "../../../redux/actions/scheduler-actions";
-import { getSchedulerDates } from "../../../redux/selectors";
+import { toggleSchedulerDate } from "../../redux/actions/scheduler-actions";
+import { getSchedulerDates } from "../../redux/selectors";
 
 export const CalendarGrid = ({ month }) => {
    const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const CalendarGrid = ({ month }) => {
    const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
    const selectDay = e => dispatch(toggleSchedulerDate(e.target.dataset.id));
    return (
-      <div className={c.grid} onClick={selectDay}>
+      <div className={c.grid}>
          {weekdays.map((e, i) => (
             <Flex
                key={i}
@@ -35,6 +35,7 @@ export const CalendarGrid = ({ month }) => {
                ].join(" ")}
                justifyContent="center"
                alignItems="center"
+               onClick={selectDay}
             >
                {e.dayOfTheMonth}
             </Flex>

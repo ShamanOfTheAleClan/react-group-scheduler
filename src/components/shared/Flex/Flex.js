@@ -5,6 +5,7 @@ import { flexDirectionHelper, justifyHelper, alignHelper } from "./utils";
 export const Flex = ({
    className,
    children,
+   onClick,
    flexDirection,
    justifyContent,
    alignItems,
@@ -15,7 +16,7 @@ export const Flex = ({
    justifyHelper(styles, justifyContent, c);
    alignHelper(styles, alignItems, c);
    return (
-      <div data-id={dataid} className={styles.join(" ")}>
+      <div onClick={onClick} data-id={dataid} className={styles.join(" ")}>
          {children}
       </div>
    );

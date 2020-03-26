@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Flex } from "../shared/Flex/Flex";
-import { CalendarGrid } from "../shared/CalendarGrid/CalendarGrid";
+import { CalendarGrid } from "../CalendarGrid/CalendarGrid";
 import { getMonthName } from "./utils";
+import Button from "../shared/Button";
 
 export const Calendar = () => {
    const [selectedMonthState, setSelectedMonthState] = useState();
@@ -21,13 +22,13 @@ export const Calendar = () => {
    return (
       <Flex flexDirection="column" alignItems="center">
          <Flex justifyContent="center">
-            <button onClick={decrementMonth}>prev</button>
+            <Button onClick={decrementMonth}>prev</Button>
             {(selectedMonthState || selectedMonthState === 0) && (
                <span>{getMonthName(selectedMonthState)}</span>
             )}
-            <button onClick={incrementMonth}>next</button>
+            <Button onClick={incrementMonth}>next</Button>
          </Flex>
-         {<CalendarGrid month={selectedMonthState} />}
+         <CalendarGrid month={selectedMonthState} />
       </Flex>
    );
 };
