@@ -22,6 +22,9 @@
 .selected {
    background-color: tomato;
 }
+.available {
+   border: 1px solid tomato;
+}
 .heading {
    font-weight: bold;
 }

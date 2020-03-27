@@ -18,6 +18,11 @@ export default (state = initialState, action) => {
          };
       case actionTypes.SET_SCHEDULER:
          return { ...action.payload };
+      case actionTypes.ADD_VOTER:
+         return {
+            ...state,
+            voters: [...state.voters, { id: action.payload, votes: [] }]
+         };
       default:
          return state;
    }

@@ -4,16 +4,40 @@ import { Flex } from "../shared/Flex/Flex";
 import { mapMonth } from "./utils";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSchedulerDate } from "../../redux/actions/scheduler-actions";
-import { getSchedulerDates } from "../../redux/selectors";
+import {
+   getSchedulerDates,
+   getUserRole,
+   getUserId,
+   getSchedulerVoters
+} from "../../redux/selectors";
+import * as constants from "../../utils/constants";
 
 export const CalendarGrid = ({ month }) => {
    const dispatch = useDispatch();
-   const calendar = useSelector(getSchedulerDates);
+   const scheduler = useSelector(getSchedulerDates);
+   const voters = useSelector(getSchedulerVoters);
+   const userRole = useSelector(getUserRole);
+   const user = useSelector(getUserId);
 
    const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-   const selectDay = e => dispatch(toggleSchedulerDate(e.target.dataset.id));
+   // GM can toggle schedules dates anytime
+   const selectDay = e => {
+      switch (userRole) {
+         case constants.GM:
+            dispatch(toggleSchedulerDate(e.target.dataset.id));
+            break;
+         case constants.PLAYER:
+            // dispatch voteSchedulerDate
+            break;
+         default:
+            break;
+      }
+   };
+   // PLAYER can only vote on scheduler. onClick put dates
+   // to scheduler -> voters
    return (
       <div className={c.grid}>
+         {console.log(voters, user)}
          {weekdays.map((e, i) => (
             <Flex
                key={i}
@@ -31,7 +55,17 @@ export const CalendarGrid = ({ month }) => {
                className={[
                   c.gridItem,
                   e.currentMonth && c.black,
-                  calendar.some(date => date === e.date) && c.selected
+                  userRole === constants.GM &&
+                     scheduler.some(date => date === e.date) &&
+                     c.selected,
+                  userRole === constants.PLAYER &&
+                     scheduler.some(date => date === e.date) &&
+                     c.available,
+                  userRole === constants.PLAYER &&
+                     voters
+                        .find(voter => voter.id == user)
+                        .votes.some(date => date === e.date) &&
+                     c.selected
                ].join(" ")}
                justifyContent="center"
                alignItems="center"

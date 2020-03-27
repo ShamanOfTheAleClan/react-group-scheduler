@@ -19,7 +19,7 @@ export const createSchedulerPoll = e => async (dispatch, getState) => {
    // to "SCHEDULE_IN_PROGRESS" on success
    const payload = { ...scheduler, status: constants.SCHEDULE_IN_PROGRESS };
 
-   const response = await fetch("http://localhost:3004/scheduler", {
+   const response = await fetch("http://localhost:3004/rooms/1/scheduler", {
       method: "POST",
       headers: {
          "Content-type": "application/json"
@@ -31,8 +31,8 @@ export const createSchedulerPoll = e => async (dispatch, getState) => {
    }
 };
 
-export const fetchScheduler = () => async (dispatch, getState) => {
-   const response = await fetch("http://localhost:3004/scheduler");
+export const fetchAndSetScheduler = () => async (dispatch, getState) => {
+   const response = await fetch(`http://localhost:3004/schedulers/3`);
    const scheduler = await response.json();
    if (response.status === 200) {
       dispatch(setSchedulerAction(scheduler));

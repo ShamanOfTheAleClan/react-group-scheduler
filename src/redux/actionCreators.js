@@ -19,3 +19,27 @@ export const setSchedulerAction = scheduler => ({
    type: actionTypes.SET_SCHEDULER,
    payload: scheduler
 });
+
+export const setLoggedInUserAction = userID => ({
+   type: actionTypes.SET_USER_ID,
+   payload: userID
+});
+
+export const removeLoggedInUserAction = () => ({
+   type: actionTypes.REMOVE_USER
+});
+
+export const setUserRoleAction = role => ({
+   type: actionTypes.SET_USER_ROLE,
+   payload: role
+});
+
+export const setRoomsAction = rooms => ({
+   type: actionTypes.SET_ROOMS,
+   payload: rooms
+});
+
+export const addVoterAction = voter => ({
+   type: actionTypes.ADD_VOTER,
+   payload: voter
+});

@@ -3,12 +3,16 @@ import { Flex } from "../shared/Flex/Flex";
 import { CalendarGrid } from "../CalendarGrid/CalendarGrid";
 import { getMonthName } from "./utils";
 import Button from "../shared/Button";
+import { useEffect } from "react";
 
 export const Calendar = () => {
    const [selectedMonthState, setSelectedMonthState] = useState();
    const todaysMonth = new Date().getMonth();
-   if (!selectedMonthState && selectedMonthState !== 0)
-      setSelectedMonthState(todaysMonth);
+
+   useEffect(() => {
+      if (!selectedMonthState && selectedMonthState !== 0)
+         setSelectedMonthState(todaysMonth);
+   }, []);
 
    const incrementMonth = () =>
       selectedMonthState === 11

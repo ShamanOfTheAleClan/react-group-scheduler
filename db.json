@@ -1,15 +1,83 @@
 {
-   "scheduler": {
-      "dates": [
-         "Tue Feb 25 2020",
-         "Thu Feb 27 2020",
-         "Sat Feb 29 2020",
-         "Wed Mar 04 2020",
-         "Tue Mar 03 2020",
-         "Thu Mar 05 2020",
-         "Sun Mar 08 2020"
-      ],
-      "status": "SCHEDULE_VOTING_IN_PROGRESS",
-      "id": 3
-   }
+   "rooms": [
+      {
+         "id": 1,
+         "members": [
+            { "id": 1, "role": "GM" },
+            { "id": 2, "role": "PLAYER" },
+            { "id": 3, "role": "PLAYER" },
+            { "id": 4, "role": "PLAYER" }
+         ],
+         "scheduler": 3
+      }
+   ],
+   "schedulers": [
+      {
+         "dates": [
+            "Tue Feb 25 2020",
+            "Thu Feb 27 2020",
+            "Sat Feb 29 2020",
+            "Wed Mar 04 2020",
+            "Tue Mar 03 2020",
+            "Thu Mar 05 2020",
+            "Sun Mar 08 2020",
+            "test"
+         ],
+         "voters": [
+            {
+               "id": 1,
+               "votes": [
+                  "Tue Feb 25 2020",
+                  "Thu Feb 27 2020",
+                  "Sat Feb 29 2020",
+                  "Wed Mar 04 2020",
+                  "Tue Mar 03 2020",
+                  "Thu Mar 05 2020",
+                  "Sun Mar 08 2020"
+               ]
+            },
+            {
+               "id": 2,
+               "votes": [
+                  "Tue Feb 25 2020",
+                  "Wed Mar 04 2020",
+                  "Sun Mar 08 2020"
+               ]
+            }
+         ],
+         "status": "SCHEDULE_VOTING_IN_PROGRESS",
+         "selectedDate": null,
+         "id": 3
+      }
+   ],
+   "users": [
+      {
+         "username": "user1",
+         "email": "email1@smth.com",
+         "password": "pass",
+         "id": 1,
+         "tag": "#5423"
+      },
+      {
+         "username": "user2",
+         "email": "email2@smth.com",
+         "password": "pass",
+         "id": 2,
+         "tag": "#6785"
+      },
+      {
+         "username": "user3",
+         "email": "email3@smth.com",
+         "password": "pass",
+         "id": 3,
+         "tag": "#1277"
+      },
+      {
+         "username": "user4",
+         "email": "email4@smth.com",
+         "password": "pass",
+         "id": 4,
+         "tag": "#3486"
+      }
+   ]
 }
