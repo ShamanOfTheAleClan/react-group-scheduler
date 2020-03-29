@@ -10,9 +10,24 @@ export const removeDateFromSchedulerAction = date => ({
    payload: date
 });
 
+export const addDateToVotesAction = ({ date, user }) => ({
+   type: actionTypes.ADD_VOTE,
+   payload: { date, user }
+});
+
+export const removeDateFromVotesAction = ({ date, user }) => ({
+   type: actionTypes.REMOVE_VOTE,
+   payload: { date, user }
+});
+
 export const setSchedulerStatusAction = state => ({
    type: actionTypes.SET_SCHEDULER_STATUS,
    payload: state
+});
+
+export const setSchedulerSelectedDateAction = date => ({
+   type: actionTypes.SET_SELECTED_DATE,
+   payload: date
 });
 
 export const setSchedulerAction = scheduler => ({
@@ -41,5 +56,10 @@ export const setRoomsAction = rooms => ({
 
 export const addVoterAction = voter => ({
    type: actionTypes.ADD_VOTER,
+   payload: voter
+});
+
+export const setVoterStatusToTrue = voter => ({
+   type: actionTypes.SET_VOTER_STATUS_TO_TRUE,
    payload: voter
 });

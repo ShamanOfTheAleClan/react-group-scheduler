@@ -15,6 +15,9 @@
 .justifyFlexStart {
    justify-content: flex-start;
 }
+.justifySpaceBetween {
+   justify-content: space-between;
+}
 .alignFlexStart {
    align-items: flex-start;
 }

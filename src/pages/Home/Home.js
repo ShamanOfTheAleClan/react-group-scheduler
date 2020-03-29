@@ -13,9 +13,5 @@ export const Home = () => {
          dispatch(fetchAndSetRooms());
       }
    }, []);
-   return (
-      <div>
-         <Link to="/room">Room</Link>
-      </div>
-   );
+   return <div></div>;
 };

@@ -38,6 +38,9 @@ const justifyHelper = (styles, justifyContent, c) => {
       case "center":
          styles.push(c.justifyCenter);
          break;
+      case "space-between":
+         styles.push(c.justifySpaceBetween);
+         break;
       default:
          throw new Error("Wrong justifyContent parameter given");
    }

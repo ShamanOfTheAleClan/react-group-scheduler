@@ -3,12 +3,24 @@
       {
          "id": 1,
          "members": [
-            { "id": 1, "role": "GM" },
-            { "id": 2, "role": "PLAYER" },
-            { "id": 3, "role": "PLAYER" },
-            { "id": 4, "role": "PLAYER" }
+            {
+               "id": 1,
+               "role": "GM"
+            },
+            {
+               "id": 2,
+               "role": "PLAYER"
+            },
+            {
+               "id": 3,
+               "role": "PLAYER"
+            },
+            {
+               "id": 4,
+               "role": "PLAYER"
+            }
          ],
-         "scheduler": 3
+         "schedulerId": 3
       }
    ],
    "schedulers": [
@@ -20,12 +32,12 @@
             "Wed Mar 04 2020",
             "Tue Mar 03 2020",
             "Thu Mar 05 2020",
-            "Sun Mar 08 2020",
-            "test"
+            "Sun Mar 08 2020"
          ],
-         "voters": [
-            {
+         "voters": {
+            "1": {
                "id": 1,
+               "voted": true,
                "votes": [
                   "Tue Feb 25 2020",
                   "Thu Feb 27 2020",
@@ -36,15 +48,25 @@
                   "Sun Mar 08 2020"
                ]
             },
-            {
+            "2": {
                "id": 2,
+               "voted": true,
                "votes": [
                   "Tue Feb 25 2020",
                   "Wed Mar 04 2020",
                   "Sun Mar 08 2020"
                ]
+            },
+            "3": {
+               "id": "3",
+               "votes": [
+                  "Thu Mar 05 2020",
+                  "Wed Mar 04 2020",
+                  "Tue Mar 03 2020"
+               ],
+               "voted": true
             }
-         ],
+         },
          "status": "SCHEDULE_VOTING_IN_PROGRESS",
          "selectedDate": null,
          "id": 3

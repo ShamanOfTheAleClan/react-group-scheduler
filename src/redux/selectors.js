@@ -10,3 +10,4 @@ export const getUserRole = state => state.user.role;
 
 // Selectors related to rooms
 export const getAllRooms = state => state.rooms;
+export const getAllMembersInRoom = state => state.rooms[1].members;

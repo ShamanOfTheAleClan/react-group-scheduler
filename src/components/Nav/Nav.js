@@ -4,20 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserId } from "../../redux/selectors";
 import Button from "../shared/Button";
 import { logoutUser } from "../../redux/actions/login-actions";
+import c from "./Nav.module.css";
+import { Flex } from "../shared/Flex/Flex";
 
 export const Nav = () => {
    const history = useHistory();
    const dispatch = useDispatch();
    const user = useSelector(getUserId);
-   const path = history.location.pathname;
    const logout = () => {
       dispatch(logoutUser());
+      history.push("/login");
    };
    return (
-      <nav>
-         <Link to="/">Home</Link>
+      <Flex className={c.nav} justifyContent="space-between">
+         <Link to="/room">
+            <Button>Room</Button>
+         </Link>
          {user ? <Button onClick={logout}>Logout</Button> : null}
-         {path === "/scheduler" ? <Link to="/">BACK</Link> : <>{null}</>}
-      </nav>
+      </Flex>
    );
 };

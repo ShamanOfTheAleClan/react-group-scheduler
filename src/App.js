@@ -25,7 +25,7 @@ function App() {
       }
    }, [user]);
    return (
-      <Container>
+      <Container className="app">
          <Nav />
          <main>
             <Switch>

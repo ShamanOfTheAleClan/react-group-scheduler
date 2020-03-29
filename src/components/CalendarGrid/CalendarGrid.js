@@ -3,7 +3,10 @@ import c from "./CalendarGrid.module.css";
 import { Flex } from "../shared/Flex/Flex";
 import { mapMonth } from "./utils";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSchedulerDate } from "../../redux/actions/scheduler-actions";
+import {
+   toggleSchedulerDate,
+   voteSchedulerDate
+} from "../../redux/actions/scheduler-actions";
 import {
    getSchedulerDates,
    getUserRole,
@@ -27,7 +30,8 @@ export const CalendarGrid = ({ month }) => {
             dispatch(toggleSchedulerDate(e.target.dataset.id));
             break;
          case constants.PLAYER:
-            // dispatch voteSchedulerDate
+            console.log(e.target);
+            dispatch(voteSchedulerDate(e.target.dataset.id, user));
             break;
          default:
             break;
@@ -37,7 +41,6 @@ export const CalendarGrid = ({ month }) => {
    // to scheduler -> voters
    return (
       <div className={c.grid}>
-         {console.log(voters, user)}
          {weekdays.map((e, i) => (
             <Flex
                key={i}
@@ -62,9 +65,7 @@ export const CalendarGrid = ({ month }) => {
                      scheduler.some(date => date === e.date) &&
                      c.available,
                   userRole === constants.PLAYER &&
-                     voters
-                        .find(voter => voter.id == user)
-                        .votes.some(date => date === e.date) &&
+                     voters[user].votes.some(date => date === e.date) &&
                      c.selected
                ].join(" ")}
                justifyContent="center"
