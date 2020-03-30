@@ -1,105 +1,96 @@
 {
-   "rooms": [
-      {
-         "id": 1,
-         "members": [
-            {
-               "id": 1,
-               "role": "GM"
-            },
-            {
-               "id": 2,
-               "role": "PLAYER"
-            },
-            {
-               "id": 3,
-               "role": "PLAYER"
-            },
-            {
-               "id": 4,
-               "role": "PLAYER"
-            }
-         ],
-         "schedulerId": 3
-      }
-   ],
-   "schedulers": [
-      {
-         "dates": [
-            "Tue Feb 25 2020",
-            "Thu Feb 27 2020",
-            "Sat Feb 29 2020",
+  "rooms": [
+    {
+      "id": 1,
+      "members": [
+        {
+          "id": 1,
+          "role": "GM"
+        },
+        {
+          "id": 2,
+          "role": "PLAYER"
+        },
+        {
+          "id": 3,
+          "role": "PLAYER"
+        },
+        {
+          "id": 4,
+          "role": "PLAYER"
+        }
+      ],
+      "schedulerId": 3
+    }
+  ],
+  "schedulers": [
+    {
+      "dates": [
+        "Fri Mar 06 2020",
+        "Sat Mar 07 2020",
+        "Sat Mar 14 2020",
+        "Fri Mar 13 2020",
+        "Wed Mar 04 2020",
+        "Tue Mar 10 2020",
+        "Mon Feb 24 2020"
+      ],
+      "voters": {
+        "1": {
+          "id": "1",
+          "votes": [
+            "Fri Mar 06 2020",
+            "Sat Mar 07 2020",
+            "Sat Mar 14 2020",
+            "Fri Mar 13 2020",
             "Wed Mar 04 2020",
-            "Tue Mar 03 2020",
-            "Thu Mar 05 2020",
-            "Sun Mar 08 2020"
-         ],
-         "voters": {
-            "1": {
-               "id": 1,
-               "voted": true,
-               "votes": [
-                  "Tue Feb 25 2020",
-                  "Thu Feb 27 2020",
-                  "Sat Feb 29 2020",
-                  "Wed Mar 04 2020",
-                  "Tue Mar 03 2020",
-                  "Thu Mar 05 2020",
-                  "Sun Mar 08 2020"
-               ]
-            },
-            "2": {
-               "id": 2,
-               "voted": true,
-               "votes": [
-                  "Tue Feb 25 2020",
-                  "Wed Mar 04 2020",
-                  "Sun Mar 08 2020"
-               ]
-            },
-            "3": {
-               "id": "3",
-               "votes": [
-                  "Thu Mar 05 2020",
-                  "Wed Mar 04 2020",
-                  "Tue Mar 03 2020"
-               ],
-               "voted": true
-            }
-         },
-         "status": "SCHEDULE_VOTING_IN_PROGRESS",
-         "selectedDate": null,
-         "id": 3
-      }
-   ],
-   "users": [
-      {
-         "username": "user1",
-         "email": "email1@smth.com",
-         "password": "pass",
-         "id": 1,
-         "tag": "#5423"
+            "Tue Mar 10 2020",
+            "Mon Feb 24 2020"
+          ],
+          "voted": true
+        },
+        "2": {
+          "id": "2",
+          "votes": [
+            "Fri Mar 06 2020",
+            "Fri Mar 13 2020",
+            "Wed Mar 04 2020"
+          ],
+          "voted": true
+        }
       },
-      {
-         "username": "user2",
-         "email": "email2@smth.com",
-         "password": "pass",
-         "id": 2,
-         "tag": "#6785"
-      },
-      {
-         "username": "user3",
-         "email": "email3@smth.com",
-         "password": "pass",
-         "id": 3,
-         "tag": "#1277"
-      },
-      {
-         "username": "user4",
-         "email": "email4@smth.com",
-         "password": "pass",
-         "id": 4,
-         "tag": "#3486"
-      }
-   ]
+      "status": "SCHEDULE_VOTING_IN_PROGRESS",
+      "selectedDate": null,
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "username": "user1",
+      "email": "email1@smth.com",
+      "password": "pass",
+      "id": 1,
+      "tag": "#5423"
+    },
+    {
+      "username": "user2",
+      "email": "email2@smth.com",
+      "password": "pass",
+      "id": 2,
+      "tag": "#6785"
+    },
+    {
+      "username": "user3",
+      "email": "email3@smth.com",
+      "password": "pass",
+      "id": 3,
+      "tag": "#1277"
+    },
+    {
+      "username": "user4",
+      "email": "email4@smth.com",
+      "password": "pass",
+      "id": 4,
+      "tag": "#3486"
+    }
+  ]
 }

@@ -1,0 +1,13 @@
+.input {
+   border: none;
+   border-bottom: 1px solid var(--light);
+   font-size: 1rem;
+   padding: 5px 10px;
+   color: var(--dark);
+}
+.input::placeholder {
+   opacity: 0.7;
+}
+.error {
+   color: var(--secondary);
+}

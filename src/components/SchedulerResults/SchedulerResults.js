@@ -48,7 +48,6 @@ export const SchedulerResults = () => {
    const setSelectedDate = e => {
       if (userRole === constants.GM) {
          dispatch(setSchedulerSelectedDateAction(e.target.dataset.id));
-         console.log(selectedDate);
       }
    };
 

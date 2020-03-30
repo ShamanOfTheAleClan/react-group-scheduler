@@ -8,6 +8,7 @@ export const ADD_VOTE = "ADD_VOTE";
 export const REMOVE_VOTE = "REMOVE_VOTE";
 export const SET_VOTER_STATUS_TO_TRUE = "SET_VOTER_STATUS_TO_TRUE";
 export const SET_SELECTED_DATE = "SET_SELECTED_DATE";
+export const DELETE_SCHEDULER = "DELETE_SCHEDULER";
 
 // User action types
 export const SET_USER_ID = "SET_USER_ID";

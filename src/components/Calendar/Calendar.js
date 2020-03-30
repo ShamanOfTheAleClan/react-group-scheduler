@@ -4,6 +4,7 @@ import { CalendarGrid } from "../CalendarGrid/CalendarGrid";
 import { getMonthName } from "./utils";
 import Button from "../shared/Button";
 import { useEffect } from "react";
+import c from "./Calendar.module.css";
 
 export const Calendar = () => {
    const [selectedMonthState, setSelectedMonthState] = useState();
@@ -15,20 +16,24 @@ export const Calendar = () => {
    }, []);
 
    const incrementMonth = () =>
-      selectedMonthState === 11
-         ? setSelectedMonthState(0)
-         : setSelectedMonthState(selectedMonthState + 1);
+      // selectedMonthState === 11
+      // ? setSelectedMonthState(0)
+      // :
+      setSelectedMonthState(selectedMonthState + 1);
    const decrementMonth = () =>
-      selectedMonthState === 0
-         ? setSelectedMonthState(11)
-         : setSelectedMonthState(selectedMonthState - 1);
+      // selectedMonthState === 0
+      // ? setSelectedMonthState(11)
+      // :
+      setSelectedMonthState(selectedMonthState - 1);
 
    return (
-      <Flex flexDirection="column" alignItems="center">
+      <Flex flexDirection="column" alignItems="center" className={c.calendar}>
          <Flex justifyContent="center">
             <Button onClick={decrementMonth}>prev</Button>
             {(selectedMonthState || selectedMonthState === 0) && (
-               <span>{getMonthName(selectedMonthState)}</span>
+               <span className={c.monthHeading}>
+                  {getMonthName(selectedMonthState)}
+               </span>
             )}
             <Button onClick={incrementMonth}>next</Button>
          </Flex>

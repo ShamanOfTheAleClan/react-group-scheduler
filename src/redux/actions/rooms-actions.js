@@ -2,8 +2,8 @@ import { setRoomsAction, setUserRoleAction } from "../actionCreators";
 
 export const fetchAndSetRooms = () => async dispatch => {
    // Retrieve all rooms this user is in
-   const response2 = await fetch("http://localhost:3004/rooms");
-   const rooms = await response2.json();
+   const response = await fetch("http://localhost:3004/rooms");
+   const rooms = await response.json();
    dispatch(setRoomsAction(rooms));
 };
 

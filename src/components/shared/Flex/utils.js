@@ -41,6 +41,9 @@ const justifyHelper = (styles, justifyContent, c) => {
       case "space-between":
          styles.push(c.justifySpaceBetween);
          break;
+      case "space-around":
+         styles.push(c.justifySpaceAround);
+         break;
       default:
          throw new Error("Wrong justifyContent parameter given");
    }

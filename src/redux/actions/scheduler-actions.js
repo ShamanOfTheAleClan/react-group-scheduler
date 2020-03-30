@@ -4,21 +4,26 @@ import {
    setSchedulerStatusAction,
    setSchedulerAction,
    removeDateFromVotesAction,
-   addDateToVotesAction
+   addDateToVotesAction,
+   deleteSchedulerAction,
+   setVoterStatusToTrueAction
 } from "../actionCreators";
 import * as constants from "../../utils/constants";
 
-export const toggleSchedulerDate = date => (dispatch, getState) => {
+export const toggleSchedulerDate = (date, userID) => (dispatch, getState) => {
    const { scheduler } = getState();
-   scheduler.dates.some(e => e === date)
-      ? dispatch(removeDateFromSchedulerAction(date))
-      : dispatch(addDateToSchedulerAction(date));
+   if (scheduler.dates.some(e => e === date)) {
+      dispatch(removeDateFromVotesAction({ date: date, user: userID }));
+      dispatch(removeDateFromSchedulerAction(date));
+   } else {
+      dispatch(addDateToVotesAction({ date: date, user: userID }));
+      dispatch(addDateToSchedulerAction(date));
+   }
 };
 
 export const voteSchedulerDate = (date, userID) => (dispatch, getState) => {
    const { scheduler } = getState();
    const voter = scheduler.voters[userID];
-   console.log(typeof date, date, ";", typeof userID, userID);
    if (
       scheduler.dates.some(e => e === date) &&
       voter.votes.some(e => e === date)
@@ -45,12 +50,15 @@ export const submitSchedulerVotes = () => async (dispatch, getState) => {
       },
       body: JSON.stringify(scheduler)
    });
-   if (response.status === 201) {
+   if (response.status === 200) {
       console.log("Votes submited");
    }
 };
 
-export const submitSchedulerSelectedDate = () => async (dispatch, getState) => {
+export const submitSchedulerSelectedDates = () => async (
+   dispatch,
+   getState
+) => {
    const { scheduler } = getState();
    // This needs to be redone once back-end is redone too.
    // Should update ONLY selected date instead of whole
@@ -63,34 +71,48 @@ export const submitSchedulerSelectedDate = () => async (dispatch, getState) => {
       },
       body: JSON.stringify(payload)
    });
-   if (response.status === 201) {
+   if (response.status === 200) {
       dispatch(setSchedulerStatusAction(constants.SCHEDULE_DATE_SELECTED));
-      console.log("Selected date submited");
+      return { status: true };
    }
 };
 
-export const createSchedulerPoll = e => async (dispatch, getState) => {
+export const createSchedulerPoll = user => async (dispatch, getState) => {
+   dispatch(setVoterStatusToTrueAction(user));
    const { scheduler } = getState();
    // Back-end should be configured to set scheduler.state
    // to "SCHEDULE_IN_PROGRESS" on success
    const payload = { ...scheduler, status: constants.SCHEDULE_IN_PROGRESS };
 
-   const response = await fetch("http://localhost:3004/schedulers", {
-      method: "POST",
+   const response = await fetch("http://localhost:3004/schedulers/3", {
+      method: "PUT",
       headers: {
          "Content-type": "application/json"
       },
       body: JSON.stringify(payload)
    });
-   if (response.status === 201) {
+   if (response.status === 200) {
       dispatch(setSchedulerStatusAction(constants.SCHEDULE_IN_PROGRESS));
    }
 };
 
-export const fetchAndSetScheduler = () => async (dispatch, getState) => {
+export const fetchAndSetScheduler = () => async dispatch => {
    const response = await fetch(`http://localhost:3004/schedulers/3`);
    const scheduler = await response.json();
    if (response.status === 200) {
       dispatch(setSchedulerAction(scheduler));
+   }
+};
+
+export const deleteScheduler = () => async dispatch => {
+   const response = await fetch("http://localhost:3004/schedulers/3", {
+      method: "PUT",
+      headers: {
+         "Content-type": "application/json"
+      }
+   });
+   if (response.status === 200) {
+      dispatch(deleteSchedulerAction());
+      return { status: true };
    }
 };

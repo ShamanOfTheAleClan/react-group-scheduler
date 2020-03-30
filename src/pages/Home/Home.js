@@ -13,5 +13,9 @@ export const Home = () => {
          dispatch(fetchAndSetRooms());
       }
    }, []);
-   return <div></div>;
+   return (
+      <div>
+         <h2 style={{ textAlign: "center" }}>Select a room to enter</h2>
+      </div>
+   );
 };

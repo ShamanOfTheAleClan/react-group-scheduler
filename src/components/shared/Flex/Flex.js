@@ -9,14 +9,20 @@ export const Flex = ({
    flexDirection,
    justifyContent,
    alignItems,
-   dataid
+   dataid,
+   style
 }) => {
    const styles = [c.flex, className];
    flexDirectionHelper(styles, flexDirection, c);
    justifyHelper(styles, justifyContent, c);
    alignHelper(styles, alignItems, c);
    return (
-      <div onClick={onClick} data-id={dataid} className={styles.join(" ")}>
+      <div
+         style={style}
+         onClick={onClick}
+         data-id={dataid}
+         className={styles.join(" ")}
+      >
          {children}
       </div>
    );

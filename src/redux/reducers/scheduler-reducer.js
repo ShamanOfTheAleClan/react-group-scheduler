@@ -1,8 +1,9 @@
 import * as actionTypes from "../actionTypes";
+import * as constants from "../../utils/constants";
 
 const initialState = {
    dates: [],
-   status: null,
+   status: constants.SCHEDULE_NOT_CREATED,
    voters: { undefined: { votes: [] } }
 };
 
@@ -31,11 +32,6 @@ export default (state = initialState, action) => {
             }
          };
       case actionTypes.ADD_VOTE:
-         console.log(state);
-         console.log(state.voters);
-         console.dir({
-            [JSON.stringify(state.voters[action.payload.user])]: "h"
-         });
          return {
             ...state,
             voters: {
@@ -78,6 +74,8 @@ export default (state = initialState, action) => {
             ...state,
             selectedDate: action.payload
          };
+      case actionTypes.DELETE_SCHEDULER:
+         return { ...initialState, status: constants.SCHEDULE_NOT_CREATED };
       default:
          return state;
    }

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
    createSchedulerPoll,
    submitSchedulerVotes,
-   submitSchedulerSelectedDate
+   submitSchedulerSelectedDates
 } from "../../redux/actions/scheduler-actions";
 import {
    getSchedulerDates,
@@ -19,12 +19,18 @@ import {
 import { useState } from "react";
 import { SchedulerResults } from "../../components/SchedulerResults/SchedulerResults";
 import * as constants from "../../utils/constants";
-import { setVoterStatusToTrue } from "../../redux/actionCreators";
+import { setVoterStatusToTrueAction } from "../../redux/actionCreators";
 import c from "./Scheduler.module.css";
+import { useHistory } from "react-router";
+import SchedulerDeleteModal from "../../components/SchedulerDeleteModal";
+import { useEffect } from "react";
 
 export const Scheduler = () => {
    const [warningState, setWarningState] = useState(false);
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [editingSchedule, setEditingSchedule] = useState(false);
    const dispatch = useDispatch();
+   const history = useHistory();
    const selectedSchedulerDates = useSelector(getSchedulerDates);
    const user = useSelector(getUserId);
    const voters = useSelector(getSchedulerVoters);
@@ -32,11 +38,31 @@ export const Scheduler = () => {
    const userRole = useSelector(getUserRole);
    const selectedDate = useSelector(getSchedulerSelectedDate);
 
-   const didUserVote = voters[user].voted;
+   const SCHEDULE_NOT_CREATED =
+      schedulerStatus === constants.SCHEDULE_NOT_CREATED;
+   const SCHEDULE_IN_PROGRESS =
+      schedulerStatus === constants.SCHEDULE_IN_PROGRESS;
+   const SCHEDULE_DATE_SELECTED =
+      schedulerStatus === constants.SCHEDULE_DATE_SELECTED;
+
+   useEffect(() => {
+      if (
+         schedulerStatus === constants.SCHEDULE_NOT_CREATED &&
+         userRole !== constants.GM
+      ) {
+         history.push("/");
+      }
+   }, []);
+
+   const didUserVote = user => {
+      if (voters[user]) {
+         return voters[user].voted ? true : false;
+      }
+   };
 
    const createPoll = () => {
       if (selectedSchedulerDates.length > 0) {
-         dispatch(createSchedulerPoll());
+         dispatch(createSchedulerPoll(user));
       } else {
          setWarningState(true);
          setTimeout(() => setWarningState(false), 5000);
@@ -45,7 +71,7 @@ export const Scheduler = () => {
 
    const votePoll = () => {
       if (voters[user].votes.length > 0) {
-         dispatch(setVoterStatusToTrue(user));
+         dispatch(setVoterStatusToTrueAction(user));
          dispatch(submitSchedulerVotes());
       } else {
          setWarningState(true);
@@ -53,34 +79,85 @@ export const Scheduler = () => {
       }
    };
 
-   const submitSelectedDate = () => {
-      dispatch(submitSchedulerSelectedDate());
+   const submitSelectedDates = async () => {
+      const { status } = await dispatch(submitSchedulerSelectedDates());
+      if (status) history.push("/room");
    };
 
+   const editSchedule = () => {
+      if (editingSchedule) {
+         votePoll();
+      }
+      toggleEditingSchedule();
+   };
+
+   const toggleDeleteWarningModal = () => setIsModalOpen(!isModalOpen);
+   const toggleEditingSchedule = () => setEditingSchedule(!editingSchedule);
+
    return (
-      <Flex flexDirection="column" alignItems="center">
-         <h2>{didUserVote ? "Poll results" : "Pick your days"}</h2>
+      <Flex
+         flexDirection="column"
+         alignItems="center"
+         style={{ padding: "0 20px" }}
+      >
+         <h2>{didUserVote(user) ? "Poll results" : "Pick your days"}</h2>
 
-         {didUserVote ? <SchedulerResults /> : <Calendar />}
-
-         {warningState && <div>You must select at least 1 date</div>}
-
-         {schedulerStatus === constants.SCHEDULE_NOT_CREATED && (
-            <Button onClick={createPoll}>Accept</Button>
+         {didUserVote(user) && !editingSchedule ? (
+            <SchedulerResults />
+         ) : (
+            <Calendar />
          )}
 
-         {schedulerStatus === constants.SCHEDULE_IN_PROGRESS &&
-            !didUserVote && <Button onClick={votePoll}>Accept</Button>}
+         {warningState && (
+            <div className={c.error}>You must select at least 1 date</div>
+         )}
 
-         {schedulerStatus === constants.SCHEDULE_IN_PROGRESS &&
-            userRole === constants.GM && (
+         {SCHEDULE_NOT_CREATED && (
+            <Button onClick={createPoll} text="Create poll" />
+         )}
+
+         {SCHEDULE_IN_PROGRESS && !didUserVote(user) ? (
+            <Button onClick={votePoll} text="Accept" />
+         ) : (
+            <Button
+               onClick={editSchedule}
+               style={{ backgroundColor: "var(--tertiary)" }}
+               text={editingSchedule ? "Save" : "Edit my votes"}
+            />
+         )}
+
+         <Flex justifyContent="space-around" style={{ marginTop: "1rem" }}>
+            {SCHEDULE_IN_PROGRESS && userRole === constants.GM && (
                <Button
-                  onClick={submitSelectedDate}
+                  onClick={submitSelectedDates}
                   className={selectedDate ? null : c.inactive}
-               >
-                  Set final date
-               </Button>
+                  text="Set final date"
+               />
             )}
+
+            {SCHEDULE_DATE_SELECTED && userRole === constants.GM && (
+               <Button
+                  onClick={submitSelectedDates}
+                  className={selectedDate ? null : c.inactive}
+                  text="Change final date"
+               />
+            )}
+            {(SCHEDULE_IN_PROGRESS || SCHEDULE_DATE_SELECTED) &&
+               userRole === constants.GM && (
+                  <Button
+                     onClick={toggleDeleteWarningModal}
+                     style={{
+                        backgroundColor: "var(--secondary)"
+                     }}
+                     text="Delete poll"
+                  />
+               )}
+         </Flex>
+
+         <SchedulerDeleteModal
+            toggleModal={toggleDeleteWarningModal}
+            isModalOpen={isModalOpen}
+         />
       </Flex>
    );
 };

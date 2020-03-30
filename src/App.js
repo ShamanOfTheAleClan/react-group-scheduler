@@ -26,7 +26,7 @@ function App() {
    }, [user]);
    return (
       <Container className="app">
-         <Nav />
+         {user ? <Nav /> : null}
          <main>
             <Switch>
                {routes.map((route, index) => (

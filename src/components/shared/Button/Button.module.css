@@ -3,13 +3,14 @@
    padding: 0 15px;
    border-radius: var(--height);
    height: var(--height);
-   background-color: var(--darkBlue);
+   background-color: var(--primaryDark);
    color: var(--white);
    /* border-color: var(--darkBlue); */
    border: none;
    font-size: 1rem;
+   cursor: pointer;
 }
 
 .button:active {
-   background-color: var(--lightBlue);
+   background-color: var(--primaryLight);
 }

@@ -59,7 +59,11 @@ export const addVoterAction = voter => ({
    payload: voter
 });
 
-export const setVoterStatusToTrue = voter => ({
+export const setVoterStatusToTrueAction = voter => ({
    type: actionTypes.SET_VOTER_STATUS_TO_TRUE,
    payload: voter
+});
+
+export const deleteSchedulerAction = () => ({
+   type: actionTypes.DELETE_SCHEDULER
 });

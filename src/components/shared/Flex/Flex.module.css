@@ -18,6 +18,9 @@
 .justifySpaceBetween {
    justify-content: space-between;
 }
+.justifySpaceAround {
+   justify-content: space-around;
+}
 .alignFlexStart {
    align-items: flex-start;
 }

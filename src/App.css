@@ -1,15 +1,18 @@
 .app {
-   --white: #eee;
-   --light: #d8d8d8;
-   --dark: #252528;
-   --gold: #ceb467;
-   --lightBlue: #7b98c6;
-   --darkBlue: #416093;
-   --font: "Baloo Thambi 2", cursive;
    max-width: 100vw;
    min-height: 100vh;
    overflow: hidden;
    box-sizing: border-box;
+}
+*:root {
+   --white: #eee;
+   --light: #d8d8d8;
+   --dark: #252528;
+   --tertiary: #9bd376;
+   --secondary: #e58067;
+   --primaryLight: #7b98c6;
+   --primaryDark: #416093;
+   --font: "Baloo Thambi 2", cursive;
 }
 
 * {

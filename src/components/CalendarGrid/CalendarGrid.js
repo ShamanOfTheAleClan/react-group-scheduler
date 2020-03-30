@@ -27,7 +27,7 @@ export const CalendarGrid = ({ month }) => {
    const selectDay = e => {
       switch (userRole) {
          case constants.GM:
-            dispatch(toggleSchedulerDate(e.target.dataset.id));
+            dispatch(toggleSchedulerDate(e.target.dataset.id, user));
             break;
          case constants.PLAYER:
             console.log(e.target);

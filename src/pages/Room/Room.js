@@ -21,6 +21,7 @@ import {
 import { addVoterAction } from "../../redux/actionCreators";
 import { useState } from "react";
 import c from "./Room.module.css";
+import SchedulerWidget from "../../components/SchedulerWidget";
 
 export const Room = () => {
    const dispatch = useDispatch();
@@ -60,7 +61,7 @@ export const Room = () => {
          content =
             userRole === constants.GM ? (
                <Link to="/scheduler">
-                  <Button>Scheduler</Button>
+                  <Button onClick={addUserToVotersArray}>Scheduler</Button>
                </Link>
             ) : null;
 
@@ -75,7 +76,15 @@ export const Room = () => {
       case constants.SCHEDULE_DATE_SELECTED:
          // GM should be able to click on it
          // others - not
-         content = <div>{selectedDate}</div>;
+         content = <SchedulerWidget selectedDate={selectedDate} />;
+         content =
+            userRole === constants.GM ? (
+               <Link className={c.link} to="/scheduler">
+                  <SchedulerWidget selectedDate={selectedDate} />
+               </Link>
+            ) : (
+               <SchedulerWidget selectedDate={selectedDate} />
+            );
          break;
       default:
          break;

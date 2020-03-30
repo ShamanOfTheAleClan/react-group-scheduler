@@ -9,8 +9,7 @@ export const loginUser = credentials => async (dispatch, useState) => {
    // App.js checks if localStorage contains "user" and
    // redirects to login if false
    if (!credentials) {
-      window.alert("You must enter email and password");
-      return;
+      return { status: false, message: "You must enter email and password" };
    }
    const email = credentials.email;
    const password = credentials.password;
@@ -23,9 +22,12 @@ export const loginUser = credentials => async (dispatch, useState) => {
       const { id } = users.find(user => user.email === email);
       window.localStorage.setItem("user", id);
       dispatch(setLoggedInUserAction(id));
-      console.log("success");
+      return { status: true };
    } else {
-      window.alert("Email or password are incorrect");
+      return {
+         status: false,
+         message: "Email or password are incorrect."
+      };
    }
 };
 
