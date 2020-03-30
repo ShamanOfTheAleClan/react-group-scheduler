@@ -38,11 +38,11 @@ export const Scheduler = () => {
    const userRole = useSelector(getUserRole);
    const selectedDate = useSelector(getSchedulerSelectedDate);
 
-   const SCHEDULE_NOT_CREATED =
+   const isSchedulerNotCreated =
       schedulerStatus === constants.SCHEDULE_NOT_CREATED;
-   const SCHEDULE_IN_PROGRESS =
+   const isSchedulerInProgress =
       schedulerStatus === constants.SCHEDULE_IN_PROGRESS;
-   const SCHEDULE_DATE_SELECTED =
+   const isSchedulerDateSelected =
       schedulerStatus === constants.SCHEDULE_DATE_SELECTED;
 
    useEffect(() => {
@@ -112,11 +112,11 @@ export const Scheduler = () => {
             <div className={c.error}>You must select at least 1 date</div>
          )}
 
-         {SCHEDULE_NOT_CREATED && (
+         {isSchedulerNotCreated && (
             <Button onClick={createPoll} text="Create poll" />
          )}
 
-         {SCHEDULE_IN_PROGRESS && !didUserVote(user) ? (
+         {isSchedulerInProgress && !didUserVote(user) ? (
             <Button onClick={votePoll} text="Accept" />
          ) : (
             <Button
@@ -127,7 +127,7 @@ export const Scheduler = () => {
          )}
 
          <Flex justifyContent="space-around" style={{ marginTop: "1rem" }}>
-            {SCHEDULE_IN_PROGRESS && userRole === constants.GM && (
+            {isSchedulerInProgress && userRole === constants.GM && (
                <Button
                   onClick={submitSelectedDates}
                   className={selectedDate ? null : c.inactive}
@@ -135,14 +135,14 @@ export const Scheduler = () => {
                />
             )}
 
-            {SCHEDULE_DATE_SELECTED && userRole === constants.GM && (
+            {isSchedulerDateSelected && userRole === constants.GM && (
                <Button
                   onClick={submitSelectedDates}
                   className={selectedDate ? null : c.inactive}
                   text="Change final date"
                />
             )}
-            {(SCHEDULE_IN_PROGRESS || SCHEDULE_DATE_SELECTED) &&
+            {(isSchedulerInProgress || isSchedulerDateSelected) &&
                userRole === constants.GM && (
                   <Button
                      onClick={toggleDeleteWarningModal}
